@@ -1,0 +1,48 @@
+{
+	"Name": "gitea",
+	"Version": "0.1.0",
+	"Author": "free-bots",
+	"URL": "https://github.com/free-bots/gitea-streamdeck",
+	"Actions": [
+		{
+			"Name": "Sync Mirror",
+			"UUID": "to.free-bots.gitea.sync-mirror",
+			"Icon": "imgs/actions/sync-mirror/icon",
+			"Tooltip": "Syncs your Gitea mirror with the upstream.",
+			"PropertyInspectorPath": "pi/sync-mirror/index.html",
+			"Controllers": [
+				"Keypad"
+			],
+			"States": [
+				{
+					"Image": "imgs/actions/sync-mirror/key",
+					"TitleAlignment": "middle"
+				}
+			]
+		}
+	],
+	"Category": "gitea",
+	"CategoryIcon": "imgs/plugin/category-icon",
+	"CodePath": "bin/plugin.js",
+	"Description": "Control Gitea via the HTTP API",
+	"Icon": "imgs/plugin/marketplace",
+	"SDKVersion": 2,
+	"Software": {
+		"MinimumVersion": "6.4"
+	},
+	"OS": [
+		{
+			"Platform": "mac",
+			"MinimumVersion": "10.15"
+		},
+		{
+			"Platform": "windows",
+			"MinimumVersion": "10"
+		}
+	],
+	"Nodejs": {
+		"Version": "20",
+		"Debug": "enabled"
+	},
+	"UUID": "to.free-bots.gitea"
+}

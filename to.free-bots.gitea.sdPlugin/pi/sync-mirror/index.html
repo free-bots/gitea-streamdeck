@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,minimal-ui,viewport-fit=cover"
+    />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <title>Sync Mirror Property Inspector</title>
+    <link rel="stylesheet" href="../../libs/css/sdpi.css" />
+  </head>
+
+  <body>
+    <div class="sdpi-wrapper">
+      <div class="sdpi-item" type="field">
+        <div class="sdpi-item-label">URL</div>
+        <input
+          class="sdpi-item-value"
+          id="url"
+          value=""
+          placeholder="https://your-domain/api/v1"
+          required
+          oninput="changed()"
+        />
+      </div>
+      <div class="sdpi-item" type="password">
+        <div class="sdpi-item-label">Token</div>
+        <input
+          class="sdpi-item-value"
+          id="token"
+          type="password"
+          value=""
+          placeholder="Enter your Gitea token"
+          required
+          oninput="changed()"
+        />
+      </div>
+      <div class="sdpi-item" type="field">
+        <div class="sdpi-item-label">Repo</div>
+        <input
+          class="sdpi-item-value"
+          id="repo"
+          value=""
+          placeholder="Enter your repo to sync"
+          required
+          oninput="changed()"
+        />
+      </div>
+    </div>
+
+    <script src="../../libs/js/constants.js"></script>
+    <script src="../../libs/js/events.js"></script>
+    <script src="../../libs/js/api.js"></script>
+    <script src="../../libs/js/property-inspector.js"></script>
+    <script src="../../libs/js/dynamic-styles.js"></script>
+    <script src="./index.js"></script>
+  </body>
+</html>
