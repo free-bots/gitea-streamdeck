@@ -1,6 +1,6 @@
 {
 	"Name": "gitea",
-	"Version": "0.1.0",
+	"Version": "0.1.1",
 	"Author": "free-bots",
 	"URL": "https://github.com/free-bots/gitea-streamdeck",
 	"Actions": [

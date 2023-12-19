@@ -1,4 +1,4 @@
-import streamDeck, { action, ActionEvent, DidReceiveSettingsEvent, KeyDownEvent, SendToPluginEvent, SingletonAction, WillAppearEvent } from "@elgato/streamdeck";
+import streamDeck, { action, ActionEvent, KeyDownEvent, SendToPluginEvent, SingletonAction, WillAppearEvent } from "@elgato/streamdeck";
 import axios from 'axios';
 const logger = streamDeck.logger.createScope("SyncMirror");
 
@@ -6,7 +6,7 @@ const logger = streamDeck.logger.createScope("SyncMirror");
 export class SyncMirror extends SingletonAction<SyncSettings> {
 
 	async onWillAppear(ev: WillAppearEvent<SyncSettings>): Promise<void> {
-		await this.updateTitle(ev);
+		await this.updateTitle(ev, ev.payload.settings);
 	}
 
 	async onKeyDown(ev: KeyDownEvent<SyncSettings>): Promise<void> {
@@ -23,14 +23,12 @@ export class SyncMirror extends SingletonAction<SyncSettings> {
 	async onSendToPlugin(ev: SendToPluginEvent<object, SyncSettings>): Promise<void> {
 		const { key, value } = ev.payload as { key: string, value: string };
 		const settings = await ev.action.getSettings();
-		await ev.action.setSettings({
+		const newSettings = {
 			...settings,
 			[key]: value,
-		})
-	}
-
-	async onDidReceiveSettings(ev: DidReceiveSettingsEvent<SyncSettings>): Promise<void> {
-		await this.updateTitle(ev);
+		};
+		await ev.action.setSettings(newSettings);
+		await this.updateTitle(ev, newSettings);
 	}
 
 	private async sync(settings: SyncSettings): Promise<void> {
@@ -39,8 +37,7 @@ export class SyncMirror extends SingletonAction<SyncSettings> {
 		await axios.post(url, {});
 	}
 
-	private async updateTitle(ev: ActionEvent<any, SyncSettings>): Promise<void> {
-		const settings = await ev.action.getSettings();
+	private async updateTitle(ev: ActionEvent<any, SyncSettings> | SendToPluginEvent<any, SyncSettings>, settings: SyncSettings): Promise<void> {
 		const title = settings.repo?.split('/').join('\n');
 		await ev.action.setTitle(title);
 	}
